@@ -3,10 +3,10 @@ name: Train and Inference YOLOv11 Model
 on:
   push:
     branches:
-      - main  # 当代码推送到 `main` 分支时触发工作流
+      - master  # 当代码推送到 `master` 分支时触发工作流
   pull_request:
     branches:
-      - main  # 当向 `main` 分支发起拉取请求时触发工作流
+      - master  # 当向 `master` 分支发起拉取请求时触发工作流
 
 jobs:
   install:
