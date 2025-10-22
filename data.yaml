@@ -1,0 +1,7 @@
+train: ./mydata/images/train  # 训练集图像路径
+val: ./mydata/images/val  # 验证集图像路径
+test: ./mydata/images/test
+
+
+nc: 5
+names: ['yes', 'no', 'hello', 'iloveyou', 'thankyou']
