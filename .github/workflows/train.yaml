@@ -25,6 +25,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt  # 安装依赖
+          pip install ultralytics  # 强制安装 ultralytics
         continue-on-error: false  # 确保错误时停止
 
   train:
