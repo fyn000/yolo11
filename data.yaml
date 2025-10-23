@@ -1,6 +1,5 @@
-train: /home/runner/work/yolo11/mydata/images/train   # 训练集图像路径
-val: /home/runner/work/yolo11/mydata/images/val       # 验证集图像路径
-test: /home/runner/work/yolo11/mydata/images/test     # 测试集图像路径
-
+train: ./mydata/images/train   # 训练集图像路径
+val: ./mydata/images/val       # 验证集图像路径
+test: ./mydata/images/test     # 测试集图像路径
 nc: 5
 names: ['yes', 'no', 'hello', 'iloveyou', 'thankyou']
