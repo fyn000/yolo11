@@ -3,10 +3,10 @@ name: Train and Inference YOLOv11 Model
 on:
   push:
     branches:
-      - master  # 当代码推送到 `master` 分支时触发工作流
+      - master
   pull_request:
     branches:
-      - master  # 当向 `master` 分支发起拉取请求时触发工作流
+      - master
 
 jobs:
   install:
@@ -14,20 +14,26 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2  # 克隆仓库
+        uses: actions/checkout@v2
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.10'  # 设置 Python 版本
+          python-version: '3.10'
 
-      - name: Install dependencies
+      - name: Upgrade setuptools and wheel
         run: |
-          pip install --upgrade pip
-          pip install setuptools --upgrade  # 强制安装最新版本的 setuptools
-          pip install wheel  # 安装 wheel
-          pip install -r requirements.txt  # 安装所有依赖
-          pip install --no-cache-dir -U ultralytics  # 强制安装 ultralytics 最新版本
+          pip install --upgrade setuptools wheel
+
+      - name: Install build tools
+        run: sudo apt-get install -y build-essential  # 安装构建工具
+
+      - name: Install dependencies without cache
+        run: |
+          pip install --no-cache-dir -r requirements.txt  # 强制重新安装所有依赖
+
+      - name: Install YOLOv5 from GitHub
+        run: |
           pip install --no-cache-dir git+https://github.com/ultralytics/yolov5.git  # 安装 YOLOv5
 
       - name: Check if yolo is installed
@@ -55,11 +61,6 @@ jobs:
         run: |
           python -m yolo settings dataset_dir=./mydata/images  # 使用 python -m yolo 调用命令
 
-      - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          pip install -r requirements.txt  # 安装依赖
-
       - name: Train YOLOv11 Model
         run: |
           python train.py --img 640 --batch-size 16 --epochs 50 --data data.yaml --cfg yolov11.yaml --nc 5 --weights yolov11n.pt --name my_yolov11_model
@@ -68,7 +69,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: training-results
-          path: runs/train/my_yolov11_model/  # 上传训练结果，包括模型权重和日志
+          path: runs/train/my_yolov11_model/
 
   inference:
     runs-on: ubuntu-latest
@@ -86,4 +87,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: inference-results
-          path: runs/inference/inference_results/  # 上传推理结果，包括图像和文本文件
+          path: runs/inference/inference_results/
