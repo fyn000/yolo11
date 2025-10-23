@@ -24,20 +24,13 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install -r requirements.txt  # 安装所有依赖
-          pip install ultralytics  # 强制安装 ultralytics
+          pip install -r requirements.txt  # 安装依赖
+          pip install ultralytics  # 强制安装 ultralytics 包
 
-      - name: Check if yolo command is available
+      - name: Check if yolo is installed
         run: |
-          which yolo  # 检查 `yolo` 命令是否在 PATH 中
-          yolo --help  # 如果 `yolo` 安装正确，查看帮助信息
-
-      - name: Check dataset directories
-        run: |
-          echo "Checking if data directories exist..."
-          ls -al ./mydata/images/train
-          ls -al ./mydata/images/val
-          ls -al ./mydata/images/test
+          python -m pip show ultralytics  # 查看 ultralytics 包是否安装
+          python -m yolo --help  # 测试 `yolo` 命令是否可用
 
   train:
     runs-on: ubuntu-latest
