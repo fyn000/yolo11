@@ -24,9 +24,11 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
+          pip install setuptools --upgrade  # 强制安装最新版本的 setuptools
+          pip install wheel  # 安装 wheel
           pip install -r requirements.txt  # 安装所有依赖
-          pip install -U ultralytics  # 强制安装 ultralytics 最新版本
-          pip install --no-cache-dir --no-build-isolation git+https://github.com/ultralytics/yolov5.git  # 安装 YOLOv5
+          pip install --no-cache-dir -U ultralytics  # 强制安装 ultralytics 最新版本
+          pip install --no-cache-dir git+https://github.com/ultralytics/yolov5.git  # 安装 YOLOv5
 
       - name: Check if yolo is installed
         run: |
