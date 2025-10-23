@@ -47,7 +47,7 @@ jobs:
 
       - name: Train YOLOv11 Model
         run: |
-          python train.py --img 640 --batch-size 16 --epochs 50 --data data.yaml --cfg yolov11.yaml --nc 5 --weights yolov11s.pt --name my_yolov11_model
+          python train.py --img 640 --batch-size 16 --epochs 50 --data data.yaml --cfg yolov11.yaml --nc 5 --weights yolov11n.pt --name my_yolov11_model
 
       - name: Upload training results
         uses: actions/upload-artifact@v4
@@ -75,7 +75,7 @@ jobs:
 
       - name: Run inference
         run: |
-          python detect.py --weights runs/train/my_yolov11_model/weights/best.pt --img 640 --source ./mydata/test/images --save-txt --save-img --project ./runs/inference --name inference_results
+          python detect.py --weights runs/train/my_yolov11_model/weights/best.pt --img 640 --source mydata/test/images --save-txt --save-img --project runs/inference --name inference_results
 
       - name: Upload inference results
         uses: actions/upload-artifact@v4
