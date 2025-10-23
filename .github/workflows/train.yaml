@@ -35,10 +35,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.10'
+      - name:Update Ultralytics settings
+        run: |
+          yolo settings dataset_dir=/home/runner/work/yolo11/mydata/images
 
       - name: Install dependencies
         run: |
