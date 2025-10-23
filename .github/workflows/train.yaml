@@ -44,7 +44,7 @@ jobs:
 
       - name: Update Ultralytics settings
         run: |
-          yolo settings dataset_dir=./mydata/images
+          python -m yolo settings dataset_dir=./mydata/images  # 使用 python -m yolo 调用命令
 
       - name: Install dependencies
         run: |
