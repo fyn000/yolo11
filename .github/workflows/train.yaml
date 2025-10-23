@@ -35,9 +35,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name:Update Ultralytics settings
+      - name: Check if data directories exist
         run: |
-          yolo settings dataset_dir=/home/runner/work/yolo11/mydata/images
+          echo "Checking if data directories exist..."
+          ls -al ./mydata/images/train
+          ls -al ./mydata/images/val
+          ls -al ./mydata/images/test
+
+      - name: Update Ultralytics settings
+        run: |
+          yolo settings dataset_dir=./mydata/images
 
       - name: Install dependencies
         run: |
