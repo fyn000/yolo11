@@ -31,8 +31,7 @@ jobs:
       # Step 4: Install PyTorch (if not included in requirements)
       - name: Install PyTorch
         run: |
-          pip install torch torchvision torchaudio
-
+          pip install torch==2.9.0+cu128 torchvision torchaudio  # 安装带有 CUDA 支持的 PyTorch
       # Step 5: Train YOLOv11 model
       - name: Train YOLOv11 model
         run: |
