@@ -3,8 +3,8 @@ name: Train and Inference YOLOv11 Model
 on:
   push:
     branches:
-      - main  # 每次将代码推送到 main 分支时触发训练
-  
+      - master  # 每次将代码推送到 main 分支时触发训练
+
 
 jobs:
   train:
