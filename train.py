@@ -11,7 +11,7 @@ if __name__ == '__main__':
                 epochs=50,
                 batch=4,
                 workers=0,
-                device=0,
+                device='cpu',
                 optimizer='SGD',
                 close_mosaic=10,
                 resume=False,
